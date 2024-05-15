@@ -18,17 +18,17 @@ public class Journal
         _nextEntryId = 1;  // Start IDs from 1
     }
 
-    public void AddEntry(Entry entry)
+    public void AddEntry(Entry _entry)
     {
-        _entries.Add(entry);
+        _entries.Add(_entry);
         SaveEntries();
         LoadEntries();
     }
 
 
-    public void RemoveEntry(Entry entry)
+    public void RemoveEntry(Entry _entry)
     {
-        _entries.Remove(entry);
+        _entries.Remove(_entry);
         SaveEntries();
         LoadEntries();
     }
