@@ -53,7 +53,7 @@ public class Journal
             file.WriteLine("EntryID,Content,Date");  // Write the header
             foreach (Entry entry in _entries)
             {
-                Console.WriteLine("CURRENT ID: " + _tmpEntryId);
+                // Console.WriteLine("CURRENT ID: " + _tmpEntryId);
                 file.WriteLine($"{_tmpEntryId},{entry._entryContent},{entry._date:yyyy-MM-dd HH:mm:ss}");
                 ++_tmpEntryId; // Increment the ID value
             }
