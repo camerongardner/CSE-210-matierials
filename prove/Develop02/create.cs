@@ -21,8 +21,9 @@ public class Create
         string _prompt = _prompts[_random.Next(_prompts.Count)];
         Console.WriteLine($"Today's prompt is {_prompt}");
         string _entryContent = Console.ReadLine();
+        Console.WriteLine(_prompt);
 
-        return new Entry(_entryID, _prompt + " - " + _entryContent);
+        return new Entry(_entryID, _entryContent);
 
     }
 }

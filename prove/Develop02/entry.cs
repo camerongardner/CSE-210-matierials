@@ -5,7 +5,6 @@ public class Entry
     public int _entryId;
     public string _entryContent;
     public DateTime _date;
-    public string _prompt;
 
     public Entry(int entryId, string entryContent)
     {

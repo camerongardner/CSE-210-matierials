@@ -18,17 +18,16 @@ public class Journal
         _nextEntryId = 1;  // Start IDs from 1
     }
 
-    public void AddEntry(Entry _entry)
+    public void AddEntry(Entry entry)
     {
-        _entries.Add(_entry);
+        _entries.Add(entry);
         SaveEntries();
-        LoadEntries();
     }
 
 
-    public void RemoveEntry(Entry _entry)
+    public void RemoveEntry(Entry entry)
     {
-        _entries.Remove(_entry);
+        _entries.Remove(entry);
         SaveEntries();
         LoadEntries();
     }
@@ -49,13 +48,10 @@ public class Journal
         {
 
             _nextEntryId = 1;
-            int _tmpEntryId = _nextEntryId; // Placeholder to track the next entity
             file.WriteLine("EntryID,Content,Date");  // Write the header
             foreach (Entry entry in _entries)
             {
-                // Console.WriteLine("CURRENT ID: " + _tmpEntryId);
-                file.WriteLine($"{_tmpEntryId},{entry._entryContent},{entry._date:yyyy-MM-dd HH:mm:ss}");
-                ++_tmpEntryId; // Increment the ID value
+                file.WriteLine($"{_nextEntryId},{entry._entryContent},{entry._date:yyyy-MM-dd HH:mm:ss}");
             }
         }
     }
