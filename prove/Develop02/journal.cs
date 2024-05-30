@@ -9,6 +9,7 @@ public class Journal
     public string _title;
     public DateTime _date;
     private int _nextEntryId;  // Maintain a separate ID counter for unique IDs
+    public string _journalName;
 
     public Journal(string title)
     {
@@ -44,8 +45,11 @@ public class Journal
 
     private void SaveEntries(bool setZero = false)
     {
-        using (StreamWriter file = new StreamWriter("journal.csv", false))  // Ensure overwrite mode, not append mode
+        using (StreamWriter file = new StreamWriter($"{_journalName}", false))  // Ensure overwrite mode, not append mode
         {
+            Console.WriteLine(file);
+            Console.WriteLine(_journalName);
+
 
             _nextEntryId = 1;
             file.WriteLine("EntryID,Content,Date");  // Write the header
@@ -59,8 +63,21 @@ public class Journal
 
     public void LoadEntries()
     {
+        
         _entries = new List<Entry>();
-        string filePath = "journal.csv";
+        Console.Write("What journal would you like to use? ");
+        string filePath = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(filePath))
+        {
+            filePath = "journal.csv";
+            _journalName = filePath;
+        }
+        else
+        {
+            _journalName = $"{filePath}.csv";
+            filePath = _journalName;
+        }
 
         if (File.Exists(filePath))
         {
@@ -86,7 +103,7 @@ public class Journal
         else
         {
             File.Create(filePath).Close();  // Create the file if it does not exist and close it immediately
-            Console.WriteLine("No existing journal found. A new journal has been created.");
+            Console.WriteLine($"No existing journal found. A new journal has been created, named {filePath}.");
             // Optionally write the header to the new file
             using (StreamWriter sw = new StreamWriter(filePath))
             {

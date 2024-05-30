@@ -18,6 +18,7 @@ class Program
         {
             // Menu options list
             Console.WriteLine();
+            Console.WriteLine($"You are workng with journal {myJournal._journalName.Substring(0,myJournal._journalName.Length - 4)}");
             Console.WriteLine("0 = Terminate the program.");
             Console.WriteLine("1 = Create a journal entry");
             Console.WriteLine("2 = List all entries");
