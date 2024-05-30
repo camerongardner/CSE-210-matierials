@@ -81,7 +81,6 @@ public class Journal
             string[] lines = File.ReadAllLines(filePath);
             if (lines.Length > 1)
             {
-            //    _nextEntryId = 1;
                 for (int i = 1; i < lines.Length; i++)
                 {
                     string[] parts = lines[i].Split(',');
