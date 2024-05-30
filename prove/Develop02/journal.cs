@@ -47,15 +47,12 @@ public class Journal
     {
         using (StreamWriter file = new StreamWriter($"{_journalName}", false))  // Ensure overwrite mode, not append mode
         {
-            Console.WriteLine(file);
-            Console.WriteLine(_journalName);
-
-
             _nextEntryId = 1;
             file.WriteLine("EntryID,Content,Date");  // Write the header
             foreach (Entry entry in _entries)
             {
                 file.WriteLine($"{_nextEntryId},{entry._entryContent},{entry._date:yyyy-MM-dd HH:mm:ss}");
+                GetNextEntryId();
             }
         }
     }
@@ -84,6 +81,7 @@ public class Journal
             string[] lines = File.ReadAllLines(filePath);
             if (lines.Length > 1)
             {
+            //    _nextEntryId = 1;
                 for (int i = 1; i < lines.Length; i++)
                 {
                     string[] parts = lines[i].Split(',');
