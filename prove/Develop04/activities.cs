@@ -149,4 +149,14 @@ public class Activities
         GetReady();
     }
 
+    public string borders(string prompt)
+    {
+        string border = new string('-', prompt.Length);
+        Console.WriteLine("+" + border + "+");
+        Console.WriteLine("|" + prompt + "|");
+        // Allow user to indicate when they are ready
+        Console.WriteLine("+" + border + "+\n");
+        return border;
+    }
+
 }

@@ -38,12 +38,8 @@ public class Reflection : Activities
 
         int index = random.Next(prompts.Length);
         string prompt = prompts[index];
-        string border = new string('-', prompt.Length);
+        borders(prompt);
 
-        Console.WriteLine("+" + border + "+");
-        Console.WriteLine("|" + prompt + "|");
-        // Allow user to indicate when they are ready
-        Console.WriteLine("+" + border + "+\n");
         Console.Write("When you are ready, press Enter to continue.\n");
         Console.ReadLine();
 

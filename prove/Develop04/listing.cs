@@ -30,12 +30,9 @@ public class Listing : Activities
 
         int index = random.Next(prompts.Length);
         string prompt = prompts[index];
-        string border = new string('-', prompt.Length);
 
-        Console.WriteLine("+" + border + "+");
-        Console.WriteLine("|" + prompt + "|");
-        // Allow user to indicate when they are ready
-        Console.WriteLine("+" + border + "+\n");
+        //Display the prompt
+        borders(prompt);
 
         //Begin countdown
         CountdownTimer();
