@@ -1,0 +1,4 @@
+IsComplete,Name,Description,Bonus_Requirements,Points,Bonus_Points,45,Checklist_Count,IsEternal
+true,test,(test),0,1,0,-1, 0
+true,test,(test),3,2,5,4, 0
+false,test3,(test4),0,15,0,-1, 1
