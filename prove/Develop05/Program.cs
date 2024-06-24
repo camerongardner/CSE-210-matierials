@@ -12,9 +12,9 @@ class Program
         Console.WriteLine("Hello Develop05 World!\n");
 
         int userChoice = 0;
-        while (userChoice != 6)
+        while (userChoice != 7)
         {
-            Console.WriteLine("You have " + newGoal.ReturnTally() + "points.\n");
+            Console.WriteLine("\nYou have " + newGoal.ReturnTally() + " points.\n");
             //Clear the menu after an option has been chosen
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create new goal");
@@ -22,7 +22,8 @@ class Program
             Console.WriteLine("3. Save goals");
             Console.WriteLine("4. Load goals");
             Console.WriteLine("5. Record event");
-            Console.WriteLine("6. Quit");
+            Console.WriteLine("6. Delete a goal");
+            Console.WriteLine("7. Quit");
             Console.Write("Select a choice from the memu: ");
 
             try
@@ -52,6 +53,10 @@ class Program
                     newGoal.RecordEvent();
                 }
                 else if (userChoice == 6)
+                {
+                    newGoal.DeleteGoal();
+                }
+                else if (userChoice == 7)
                 {
                     Console.WriteLine("Goodbye!");
                 }

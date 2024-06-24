@@ -21,8 +21,8 @@ public class Goals
 
     //Show memu for for choosing option 1
     public void DisplayGoalMenu()
-
     {
+        Clear();
         int goalOption = 0;
         while (goalOption != 4)
         {
@@ -68,7 +68,7 @@ public class Goals
     //Start a new goal
     public void Start()
     {
-
+        Clear();
         Console.Write("What is the name of your goal? ");
         _goalName = Console.ReadLine();
         Console.Write("What is a short description of it? ");
@@ -106,6 +106,7 @@ public class Goals
     }
     public void LoadEntries()
     {
+        Clear();
         _entries.Clear();
         Console.Write("Enter a desired goals file name or press Enter to use the default file name. ");
         string userEntry = Console.ReadLine();
@@ -149,6 +150,7 @@ public class Goals
     }
     public void ListGoals()
     {
+        Clear();
         _entries.Clear();
         string[] lines = File.ReadAllLines(_DefaultFileName);
         if (lines.Length > 1)
@@ -163,6 +165,7 @@ public class Goals
     }
     public void RecordEvent()
     {
+        Clear();
          _entries.Clear();
         string[] lines = File.ReadAllLines(_DefaultFileName);
         if (lines.Length > 1)
@@ -183,7 +186,29 @@ public class Goals
         }
         Console.Write("Which goal did you accomplish? ");
         string userEntry = Console.ReadLine();
-        int goalIndex = int.Parse(userEntry) - 1;
+        // int goalIndex = int.Parse(userEntry) - 1;
+        int goalIndex = -1;
+        try
+            {
+                goalIndex = int.Parse(userEntry) - 1;
+
+                if (goalIndex < 0 || goalIndex >= _entries.Count)
+                {
+                    Console.WriteLine("Invalid choice. Please select a valid goal number.");
+                    goalIndex = -1; // Reset goalIndex to prompt the user again
+                    while (goalIndex < 0 || goalIndex >= _entries.Count)
+                    {
+                        Console.Write("Which goal did you accomplish? ");
+                        userEntry = Console.ReadLine();
+                        goalIndex = int.Parse(userEntry) - 1;
+                    }
+                }
+
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
 
         //Completion indicator
         var parts = _entries[goalIndex].Split(',');
@@ -213,11 +238,9 @@ public class Goals
 
             goalIndex = int.Parse(userEntry) - 1;
 
-            Console.WriteLine($"What is parts 0 {parts[0]}");
 
             if ((parts[6] == parts[3]) && (parts[0] == "false"))
             { 
-                Console.WriteLine($"What is parts 0 {parts[0]}");
                 parts[0] = "true";
                 lines[goalIndex + 1] = string.Join(",", parts);
                 File.WriteAllLines(_DefaultFileName, lines);
@@ -271,5 +294,62 @@ public class Goals
             Console.WriteLine();
         }
     }
+    public void DeleteGoal()
+    {
+        Clear();
+        _entries.Clear();
+        string[] lines = File.ReadAllLines(_DefaultFileName);
+        if (lines.Length > 1)
+        {
+            for (int i = 1; i < lines.Length; i++) // Skip the header
+            {
+                _entries.Add(lines[i]);
+            }
+        }
 
+        if (_entries.Count == 0)
+        {
+            Console.WriteLine("No goals found.");
+        }
+        else
+        {
+            GoalDisplay();
+        }
+        Console.Write("Which goal would you like to delete? ");
+        string userEntry = Console.ReadLine();
+        // int goalIndex = int.Parse(userEntry) - 1;
+        int goalIndex = -1;
+        try
+            {
+                goalIndex = int.Parse(userEntry) - 1;
+
+                if (goalIndex < 0 || goalIndex >= _entries.Count)
+                {
+                    Console.WriteLine("Invalid choice. Please select a valid goal number.");
+                    goalIndex = -1; // Reset goalIndex to prompt the user again
+                    while (goalIndex < 0 || goalIndex >= _entries.Count)
+                    {
+                        Console.Write("Which goal did you accomplish? ");
+                        userEntry = Console.ReadLine();
+                        goalIndex = int.Parse(userEntry) - 1;
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+
+        _entries.RemoveAt(goalIndex);
+
+        File.WriteAllLines(_DefaultFileName, new string[] { $"IsComplete,Name,Description,Bonus_Requirements,Points,Bonus_Points,{_tally},Checklist_Count,IsEternal" });
+        foreach (var entry in _entries)
+        {
+            File.AppendAllText(_DefaultFileName, entry + Environment.NewLine);
+        }
+    }
+    public void Clear()
+    {
+        Console.Clear();
+    }
 }
