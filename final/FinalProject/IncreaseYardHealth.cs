@@ -16,7 +16,6 @@ public class IncreaseHealth
 
             // Join the array back into a string
             _gameData[0] = string.Join(",", yardValues);
-            Console.WriteLine("You have successfully cared for your yard.");
             return;
     }
 }

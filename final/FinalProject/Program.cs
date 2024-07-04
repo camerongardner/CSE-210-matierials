@@ -16,7 +16,7 @@ class Program
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. New Game");
             Console.WriteLine("2. Load Game");
-            Console.WriteLine("3. View Achievements");
+            Console.WriteLine("3. Instructions");
             Console.WriteLine("4. Quit");
             Console.Write("Select a choice from the memu: ");
 
@@ -36,7 +36,7 @@ class Program
                 }
                 else if (userChoice == 3)
                 {
-                    Console.WriteLine("View Achievements");
+                    Instructions instructions = new Instructions();
                 }
                 else if (userChoice == 4)
                 {

@@ -48,10 +48,10 @@ public class Game
         while (userChoice != 3)
         {
             //Clear the menu after an option has been chosen
-            Console.WriteLine("\nMenu Options:");
+            Console.WriteLine("\nAvailable actions:");
             Console.WriteLine("1. Take care of your grass");
             Console.WriteLine("2. Go to the store");
-            Console.WriteLine("3. Quit");
+            Console.WriteLine("3. Pause the game");
             Console.Write("Select a choice from the memu: ");
 
             try
@@ -99,6 +99,7 @@ public class Game
                 {
                     ClearTerminal();
                     Store store = new Store(_gameData);
+                    SaveGame();
                 }
                 else if (userChoice == 3)
                 {

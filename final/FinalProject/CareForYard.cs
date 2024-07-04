@@ -39,7 +39,12 @@ public class CareForYard
                 currentFertilizer -= 1;
                 yardValues[5] = currentFertilizer.ToString();
                 _gameData[0] = string.Join(",", yardValues);
-                IncreaseHealth health = new IncreaseHealth(_gameData);
+                for (int i = 0; i < 2; i++)
+                {
+                    IncreaseHealth health = new IncreaseHealth(_gameData);
+                }
+
+                Console.WriteLine("You have successfully cared for your yard.");
             }
             else if (userChoice == 2)
             {
@@ -55,6 +60,7 @@ public class CareForYard
                 yardValues[6] = currentWater.ToString();
                 _gameData[0] = string.Join(",", yardValues);
                 IncreaseHealth health = new IncreaseHealth(_gameData);
+                Console.WriteLine("You have successfully cared for your yard.");
             }
             else if (userChoice == 3)
             {
