@@ -1,37 +1,47 @@
 using System.Runtime.CompilerServices;
 
-public class Yard : Backend
+public class Yard
 {
-//Grass ASCII art
- private string _healthyGrass = @"
+
+    //Initiate the Backend class
+    Game backend = new Game();
+    //Grass ASCII art
+    private string _healthyGrass = @"
+        v  v  v
+    v v v v v
+    v  v  v  v
+    v  v  v  v  v
+    v  v  v  v  v  v
+    ";
+    private string _soSoGrass = @"
+        v  v
+    v v  v
     v  v  v
-   v v v v v
-  v  v  v  v
- v  v  v  v  v
-v  v  v  v  v  v
-";
-private string _soSoGrass = @"
+    v  v  v  v
+    v  v  v  v  v
+    ";
+    string _deadGrass = @"
+        v
+    v v
     v  v
-   v v  v
-  v  v  v
- v  v  v  v
-v  v  v  v  v
-";
-        string _deadGrass = @"
-    v
-   v v
-  v  v
- v  v
-v  v
-";
+    v  v
+    v  v
+    ";
+    //Yard values
+public int[] _artChoices = new int[9];
+
+private string _yardValuesToString;
+
+        public string SaveYard(string test)
+    {
+        for (int i = 0; i < test.Length; i++)
+        {
+            _yardValuesToString += test[i].ToString() + ",";
+        }
+        return _yardValuesToString;
+    }
 
 
-
-int[] test = [3, 1, 3, 3, 1, 3, 3, 1, 3];
-
-
-
-private int[] _artChoices = new int[] { 3, 1, 3, 3, 1, 3, 3, 1, 3 };
 
     public void ShowYard()
     {
@@ -63,7 +73,7 @@ private int[] _artChoices = new int[] { 3, 1, 3, 3, 1, 3, 3, 1, 3 };
         }
 
         // Print the 3x3 square
-        string _fence = new string('-', 48);
+        string _fence = new string('-', 60);
         Console.WriteLine($"+{_fence}+");
         for (int row = 0; row < 3; row++)
         {
@@ -75,7 +85,7 @@ private int[] _artChoices = new int[] { 3, 1, 3, 3, 1, 3, 3, 1, 3 };
                     int index = row * 3 + col;
                     resultLine += chosenArts[index][line] + ""; // Add some spacing between segments
                 }
-                while (resultLine.Length < 48)
+                while (resultLine.Length < 60)
                 {
                     resultLine += " ";
                 }
@@ -85,5 +95,4 @@ private int[] _artChoices = new int[] { 3, 1, 3, 3, 1, 3, 3, 1, 3 };
         }
         Console.WriteLine($"+{_fence}+");
     }
-
 }

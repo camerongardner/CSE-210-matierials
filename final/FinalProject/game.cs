@@ -1,4 +1,6 @@
-public class Backend
+using System.Runtime.CompilerServices;
+
+public class Game
 {
     protected int _alreadyStarted = 0;
 
@@ -6,7 +8,7 @@ public class Backend
     protected string _fileName;
 
     //User stats memory
-    protected List<string> _gameData = new List<string>();
+    public List<string> _gameData = new List<string>();
 
     //Use the following to get key values from the game data
     // _gameData[0].Split(",")[0] --- Replace the second 0 
@@ -16,7 +18,7 @@ public class Backend
     protected string _playerName;
     protected int _playerScore;
     protected int _playerLevel;
-    protected int _playerTime;
+    protected int _yardConfig;
     protected int _fertilizer;
     protected int _water;
     protected int _weed;
@@ -61,12 +63,42 @@ public class Backend
                 if (userChoice == 1)
                 {
                     ClearTerminal();
+                    string _yardValuesToString;
+                    //Get yard values
+                    _yardValuesToString = _gameData[0].Split(",")[3];
+                    for (int i = 0 ; i < _yardValuesToString.Length; i++)
+                    {
+                        yard._artChoices[i] = _yardValuesToString[i] - '0'; // Convert char to int and assign to array
+                    }
+
                     yard.ShowYard();
+                    if (_gameData[0].Split(",")[3].All(c => c == '1'))
+                    {
+                        Console.WriteLine("Game Over: the grass is dead.");
+                        break;
+                    }
+                    else {
+                        Challenge challenge = new Challenge(_gameData);
+                        SaveGame();
+                        if (_gameData[0].Split(",")[3].All(c => c == '3'))
+                        {
+                            Console.WriteLine("The yard is fully healthy.");
+                        }
+                        else if (_gameData[0].Split(",")[5] == "0" && _gameData[0].Split(",")[6] == "0")
+                        {
+                            Console.WriteLine("You are out of fertilizer and water. Go to the store to get more.");
+                        }
+                        else
+                        {
+                            CareForYard careForYard = new CareForYard(_gameData);
+                            SaveGame();
+                        }
+                    }
                 }
                 else if (userChoice == 2)
                 {
                     ClearTerminal();
-                    Console.WriteLine("Go to the store");
+                    Store store = new Store(_gameData);
                 }
                 else if (userChoice == 3)
                 {
@@ -115,7 +147,7 @@ public class Backend
         _playerName = Console.ReadLine();
         _playerScore = 0;
         _playerLevel = 1;
-        _playerTime = 0;
+        _yardConfig = 333333333;
         _fertilizer = 0;
         _water = 0;
         _weed = 0;
@@ -128,7 +160,7 @@ public class Backend
         _totalDisease = 0;
         _totalWater = 0;
         _totalFertilizer = 0;
-        _gameData.Add($"{_playerName},{_playerScore},{_playerLevel},{_playerTime},{_alreadyStarted},{_fertilizer},{_water},{_weed},{_pests},{_disease},{_harvested},{_totalHarvested},{_totalWeed},{_totalPests},{_totalDisease},{_totalWater},{_totalFertilizer}");
+        _gameData.Add($"{_playerName},{_playerScore},{_playerLevel},{_yardConfig},{_alreadyStarted},{_fertilizer},{_water},{_weed},{_pests},{_disease},{_harvested},{_totalHarvested},{_totalWeed},{_totalPests},{_totalDisease},{_totalWater},{_totalFertilizer}");
 
         // Save the new game instance 
         LoadSavedGame();
@@ -156,7 +188,7 @@ public class Backend
         _playerName = "";
         _playerScore = 0;
         _playerLevel = 1;
-        _playerTime = 0;
+        _yardConfig = 333333333;
         _fertilizer = 0;
         _water = 0;
         _weed = 0;

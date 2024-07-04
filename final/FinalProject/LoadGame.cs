@@ -49,7 +49,7 @@ public class LoadGame : Progress
 
             using (StreamWriter sw = File.AppendText(_fileName))
             {
-                sw.WriteLine("Name,Score,Level,Time,AlreadyStarted,Fertilizer,Water,Weed,Pests,Disease,Harvested,TotalHarvested,TotalWeed,TotalPests,TotalDisease,TotalWater,TotalFertilizer");
+                sw.WriteLine("Name,Score,Level,Yard_Config,AlreadyStarted,Fertilizer,Water,Weed,Pests,Disease,Harvested,TotalHarvested,TotalWeed,TotalPests,TotalDisease,TotalWater,TotalFertilizer");
             }
         }
 

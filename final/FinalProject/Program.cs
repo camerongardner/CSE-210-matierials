@@ -7,7 +7,7 @@ class Program
         Console.WriteLine("Hello FinalProject World!");
 
         //Initiate classes
-        Backend backend = new Backend();
+        Game backend = new Game();
 
         int userChoice = 0;
         while (userChoice != 4)

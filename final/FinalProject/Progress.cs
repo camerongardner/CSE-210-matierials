@@ -1,4 +1,4 @@
-public abstract class Progress : Backend
+public abstract class Progress : Game
 {
     public abstract void Update(string filename, List<string> gameData);
 }
