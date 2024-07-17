@@ -20,7 +20,7 @@ public class Yard
     v  v  v  v
     v  v  v  v  v
     ";
-    string _deadGrass = @"
+    private string _deadGrass = @"
         v
     v v
     v  v
